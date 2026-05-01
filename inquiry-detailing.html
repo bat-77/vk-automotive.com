@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Detailing — VK AUTOMOTIVE</title>
+    <meta
+      name="description"
+      content="Book your premium car detailing session with VK Automotive in Limburg, Belgium."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ═══ NAVBAR ═══ -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo"><span>VK</span> AUTOMOTIVE</a>
+        <ul class="nav-links" id="nav-links" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="inquire.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="inquiry-detailing.html" class="nav-cta">Book Now</a></li>
+        </ul>
+        <button
+          class="nav-toggle"
+          id="nav-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <main>
+      <!-- ═══ PAGE HERO ═══ -->
+      <section class="page-hero">
+        <span class="section-label">Step 1 of 1</span>
+        <h1 class="section-title">Book Your Detail</h1>
+        <p class="section-desc" style="margin: 1rem auto 0; text-align: center">
+          Select your package, fill in your details, and we'll confirm your
+          appointment within 24 hours.
+        </p>
+      </section>
+
+      <div class="glow-divider"></div>
+
+      <!-- ═══ FORM SECTION ═══ -->
+      <section class="form-section">
+        <form
+          id="detailing-form"
+          name="detailing-inquiry"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          aria-label="Detailing booking form"
+        >
+          <!-- Netlify hidden fields -->
+          <input type="hidden" name="form-name" value="detailing-inquiry" />
+          <p style="display: none">
+            <label>Don't fill this out: <input name="bot-field" /></label>
+          </p>
+          <input type="hidden" id="hidden-package" name="package" value="" />
+          <input type="hidden" id="hidden-price" name="price" value="" />
+
+          <div class="form-container">
+            <!-- ── STEP 1: Tier ── -->
+            <div style="margin-bottom: 1.5rem">
+              <span
+                class="section-label"
+                style="margin-bottom: 1rem; display: block"
+                >Step 1 — Choose Your Tier</span
+              >
+              <div class="pkg-tabs">
+                <div
+                  class="pkg-tab active"
+                  data-tier="standard"
+                  role="button"
+                  tabindex="0"
+                  aria-pressed="true"
+                >
+                  <div class="pkg-tab-name">Standard</div>
+                  <div class="pkg-tab-sub">Interior · Exterior · Combo</div>
+                </div>
+                <div
+                  class="pkg-tab"
+                  data-tier="premium"
+                  role="button"
+                  tabindex="0"
+                  aria-pressed="false"
+                >
+                  <div class="pkg-tab-name">Premium</div>
+                  <div class="pkg-tab-sub">
+                    Deep Clean · Deep Polish · Combo
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── STEP 2: Service ── -->
+            <div style="margin-bottom: 2.5rem">
+              <span
+                class="section-label"
+                style="margin-bottom: 1rem; display: block"
+                >Step 2 — Choose Your Service</span
+              >
+              <div class="pkg-options">
+                <div
+                  class="pkg-option selected"
+                  data-service="interior"
+                  role="button"
+                  tabindex="0"
+                  aria-pressed="true"
+                >
+                  <div class="pkg-option-name">Interior</div>
+                  <div class="pkg-option-price" id="price-interior">€75</div>
+                </div>
+                <div
+                  class="pkg-option"
+                  data-service="exterior"
+                  role="button"
+                  tabindex="0"
+                  aria-pressed="false"
+                >
+                  <div class="pkg-option-name">Exterior</div>
+                  <div class="pkg-option-price" id="price-exterior">€75</div>
+                </div>
+                <div
+                  class="pkg-option"
+                  data-service="combo"
+                  role="button"
+                  tabindex="0"
+                  aria-pressed="false"
+                >
+                  <div class="pkg-option-name">Combo</div>
+                  <div class="pkg-option-price" id="price-combo">€140</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Price Summary ── -->
+            <div class="form-summary" aria-live="polite">
+              <div>
+                <div class="form-summary-label">Selected Package</div>
+                <div
+                  style="
+                    font-family: var(--font-ui);
+                    font-size: 0.9rem;
+                    color: var(--grey);
+                    margin-top: 4px;
+                  "
+                >
+                  <span id="selected-tier-label">Standard</span> —
+                  <span id="selected-svc-label">Interior</span>
+                </div>
+              </div>
+              <div style="text-align: right">
+                <div class="form-summary-label">Total</div>
+                <div class="form-summary-price" id="selected-price">€75</div>
+              </div>
+            </div>
+
+            <!-- ── Step 3: Personal Details ── -->
+            <span
+              class="section-label"
+              style="margin-bottom: 1.2rem; display: block"
+              >Step 3 — Your Details</span
+            >
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="name">Full Name *</label>
+                <input
+                  class="form-input"
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Jean-Pierre Dupont"
+                  required
+                  autocomplete="name"
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone Number *</label>
+                <input
+                  class="form-input"
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="+32 4XX XX XX XX"
+                  required
+                  autocomplete="tel"
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="car-type">Vehicle Type *</label>
+                <select
+                  class="form-select"
+                  id="car-type"
+                  name="car-type"
+                  required
+                >
+                  <option value="" disabled selected>
+                    Select your vehicle
+                  </option>
+                  <option value="Sedan">Sedan / Berline</option>
+                  <option value="SUV">SUV / 4x4</option>
+                  <option value="Coupe">Coupé / Sports Car</option>
+                  <option value="Hatchback">Hatchback / Citadine</option>
+                  <option value="Convertible">Convertible / Cabriolet</option>
+                  <option value="Estate">Estate / Break</option>
+                  <option value="Van">Van / Minivan</option>
+                  <option value="Pickup">Pick-up / Truck</option>
+                  <option value="Motorcycle">Motorcycle</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="car-model"
+                  >Car Brand &amp; Model *</label
+                >
+                <input
+                  class="form-input"
+                  type="text"
+                  id="car-model"
+                  name="car-model"
+                  placeholder="e.g. Mercedes G-Wagon AMG"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- ── Date Selection (Day + Month selects, NO input type=date) ── -->
+            <div class="form-group" style="margin-bottom: 1.5rem">
+              <label class="form-label">Preferred Appointment Date *</label>
+              <div class="date-row">
+                <select
+                  class="form-select"
+                  id="booking-day"
+                  name="booking-day"
+                  required
+                >
+                  <option value="" disabled selected>Day</option>
+                  <!-- Populated by JS -->
+                </select>
+                <select
+                  class="form-select"
+                  id="booking-month"
+                  name="booking-month"
+                  required
+                >
+                  <option value="" disabled selected>Month</option>
+                  <!-- Populated by JS -->
+                </select>
+              </div>
+            </div>
+
+            <!-- ── Preferred Time ── -->
+            <div class="form-group" style="margin-bottom: 1.5rem">
+              <label class="form-label" for="booking-time"
+                >Preferred Time Slot</label
+              >
+              <select class="form-select" id="booking-time" name="booking-time">
+                <option value="" disabled selected>Select a time slot</option>
+                <option value="Morning (8h–11h)">Morning (8h–11h)</option>
+                <option value="Late Morning (11h–13h)">
+                  Late Morning (11h–13h)
+                </option>
+                <option value="Afternoon (13h–16h)">Afternoon (13h–16h)</option>
+                <option value="Late Afternoon (16h–19h)">
+                  Late Afternoon (16h–19h)
+                </option>
+                <option value="Flexible">Flexible — Any Time</option>
+              </select>
+            </div>
+
+            <!-- ── Location ── -->
+            <div class="form-group" style="margin-bottom: 1.5rem">
+              <label class="form-label" for="location"
+                >Service Location *</label
+              >
+              <input
+                class="form-input"
+                type="text"
+                id="location"
+                name="location"
+                placeholder="Your address in Limburg (or surrounding area)"
+                required
+              />
+            </div>
+
+            <!-- ── WhatsApp checkbox ── -->
+            <div class="form-group" style="margin-bottom: 2rem">
+              <label class="form-check">
+                <input type="checkbox" name="whatsapp-ok" value="yes" />
+                I'm reachable via
+                <strong style="color: var(--white)">WhatsApp</strong> on the
+                number above
+              </label>
+            </div>
+
+            <!-- ── Custom Notes ── -->
+            <div class="form-group full" style="margin-bottom: 2rem">
+              <label class="form-label" for="notes">Additional Notes</label>
+              <textarea
+                class="form-textarea"
+                id="notes"
+                name="notes"
+                placeholder="Tell us anything relevant about your vehicle, specific areas of concern, or any custom requests..."
+                rows="5"
+              ></textarea>
+            </div>
+
+            <!-- ── Submit ── -->
+            <button type="submit" class="submit-btn">
+              ✦ Send Booking Request
+            </button>
+
+            <p
+              style="
+                font-family: var(--font-ui);
+                font-size: 0.75rem;
+                color: var(--grey);
+                text-align: center;
+                margin-top: 1.2rem;
+                letter-spacing: 0.05em;
+              "
+            >
+              We'll confirm your appointment via phone or WhatsApp within 24
+              hours.
+            </p>
+          </div>
+          <!-- /.form-container -->
+        </form>
+      </section>
+    </main>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-logo"><span>VK</span> AUTOMOTIVE</div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="inquire.html">Services</a>
+          <a href="inquiry-detailing.html">Book Now</a>
+          <a href="about.html">About</a>
+          <a href="faq.html">FAQ</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="footer-line"></div>
+        <p class="footer-copy">
+          &copy; 2025 VK Automotive · Limburg, Belgium · All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      // Keyboard accessibility for custom selectors
+      document.querySelectorAll(".pkg-tab, .pkg-option").forEach((el) => {
+        el.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            el.click();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
